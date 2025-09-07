@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigate_route/screens/detail_screen.dart';
+import 'package:navigate_route/screens/third_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = '/';
@@ -8,21 +9,40 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Screen')),
+      appBar: AppBar(title: Text("Home Screen")),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            final result = await Navigator.pushNamed(
-              context,
-              DetailScreen.routeName,
-              arguments: {
-                'itemId': 'Item-456',
-                'message': 'ข้อมูลผ่าน arguments',
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                final result = await Navigator.pushNamed(
+                  context,
+                  DetailScreen.routeName,
+                  arguments: {
+                    'ItemId': 'Item-789',
+                    'massage': 'ข้อมูลจาก Named Route Args',
+                  },
+                );
+                print('returned result: $result');
               },
-            );
-            print('ค่าที่ได้กลับมา คือ $result');
-          },
-          child: const Text('Go to Detail Screen'),
+              child: Text('Go to Detail Screen'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final result = await Navigator.pushNamed(
+                  context,
+                  ThirdScreen.routeName,
+                  arguments: {
+                    'ItemId': 'Item-789',
+                    'massage': 'ข้อมูลจาก Named Route Args',
+                  },
+                );
+                print('returned result: $result');
+              },
+              child: Text('Go to Third Screen'),
+            ),
+          ],
         ),
       ),
     );
